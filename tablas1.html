@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tablas</title>
+  </head>
+  <body>
+  <!--CONSTRUCCIÓN DE TABLAS-->
+  <!--La etiqueta <table></table> sirve para indicar el inicio y cierre de una tabla 
+	  Una tabla en HTML tiene esta formada por dos partes:
+			-La cabecera <thead></thead> sirve para los titulos de las columnas de nuestra tabla
+			-El cuerpo <tbody></tbody> sirve para mostrar los datos de nuestra tabla  
+			NOTA: Las etiquetas de cabecera y cuerpo pueden omitirse al generar una tabla en HTML, aunque por buenas practicas deberin de indicarse siempre.
+	 
+	 Independientemente del Nivel (cabecera o cuerpo), las tablas se construyen con filas,
+	 para ello se utiliza la etiqueta "table row" <tr></tr>, por cada fila que requiramos tendremos que abrir esta etiqueta.
+	 Esta eqtiueta no encierra datos y SIEMPRE LLEVARÁ AL MENOS UNA COLUMNA
+	 
+	Cada fila se puede dividir a su vez en columnas, para ello utilizamos la etiqueta <td></td>, por cada columna que necesitemos este contenida 
+	en cada fila. ES ENTRE ESTAS ETIQUETAS DONDE ESCRIBIREMOS LOS DATOS
+	Ejemplo: para una tabla de 2x2, dos filas y dos columnas:
+	
+			<table>      INICIO DE TABLA
+			
+				<tr> Inicio de la Primer fila
+				
+					<td></td> columna 1 de la fila 1
+					<td></td>	columna 2 de la fila 1
+					
+				</tr> Fin de la Primer fila
+				
+				<tr> Inicio de la Segunda fila
+				
+					<td></td> columna 1 de la fila 2
+					<td></td>	columna 2 de la fila 2
+					
+				</tr> Fin de la Segunda fila
+				
+			</table> FIN DE TABLA
+	
+	Nota: cuando queremos que una fila (tr) sea nuestra cabecera y tenga una o distintas columnas utilizaremos la etiqueta:
+	"table header" <th></th> en lugar de la etiqueta<td></td>	
+  -->
+    <table width="90%" border="1" style="border:1px solid black;border-collapse:collapse;">
+		<!-- Por defecto los navegadores no dibujan los bordes de las tablas por lo que hay que indicarlos, ya sea en el head de nuestro HTML
+		o incluir la indicacion como atributo en la etiqueta table. 
+		
+		Aqui se indica un borde de 1 pixel de grueso, tipo solido y de color negro en la etiqueta style. Esta indicacion solo dibujara los margenes externos
+		de la tabla pero no los internos. Para los internos se agrega el atributo border y el 1 indica el grueso. se agrega la instruccion border-collapse
+		para que el borde sea sencillo y no doble.
+		NOTA: tanto los tr como th/td pueden recibir independientemente atributos de estilo
+ 		-->
+      <thead>
+        <tr>
+          <td><center><b>Nombre</b></center></td> <!--Al no utilizar th como etiqueta se utilizan etiquetas b y center para dar estilo a esta columna -->
+          <td style="font-weight:bold;text-align:center;">Apellido Paterno</td><!--Al no utilizar th como etiqueta se utiliza el atributo style para dar estilo a esta columna -->
+          <th>Apellido materno</th><!-- la etiqueta th tiene un estilo que distingue la cabecera -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fulanito</td>
+          <td>Perez</td>
+          <td>Hernadez</td>
+        </tr>
+        <tr>
+          <td>Juan</td>
+          <td>Sanchez</td>
+          <td>Lopez</td>
+        </tr>
+      </tbody>
+    </table>
+    <br/> <!--Salto de linea -->
+    <hr/> <!--Linea horizontal -->
+	
+	<!--TABLA CON CAMPOS COMBINADOS-->
+    <table width="90%" border="1" style="border:1px solid black;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th>Maestro</th>
+          <th>Alumnos</th>
+          <th>Calificaci&oacute;n</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr><!--Segunda fila -->
+            <td rowspan="3">Alejandra Lopez</td><!-- El atributo rowspan indica a la columna 1 de la fila 2 cuantas filas debe tener de alto, inlcuyendose a si misma-->
+            <td>Ana Roldan</td><!--Segunda columna de la fila 2-->
+            <td>9</td><!--Tercera columna de la fila 2-->
+          </tr>
+     
+		  <tr><!--Tercera fila -->
+			<!--Al tener una columna expandida la etiqueta td correspondiente a dicha columna debera omitirse en todas las filas que esta ocupando el atributo rowspan  
+			para expadir la columna.
+			-->
+            <td>Raul De Jesus</td><!--Segunda columna de la fila  3-->
+            <td>8</td><!--Tercera columna de la fila 3-->
+          </tr>
+          <tr><!--Cuarta fila -->
+            <td>Jorge Camacho</td><!--Segunda columna de la fila 4-->
+            <td>9</td><!--Tercera columna de la fila 4-->
+          </tr>
+          <tr><!--Quinta fila -->
+            <td rowspan="3">Felipe Suarez </td><!-- Primer columna de la fila 5, con altura de 3 filas -->
+            <td>Juan Lopez</td><!--Segunda columna de la fila 5-->
+            <td>10</td><!--Tercera columna de la fila 5-->
+          </tr>
+          <tr><!--Sexta fila -->
+            <td>Maria Guzman</td><!--Segunda columna de la fila 6-->
+            <td>8</td><!--Tercera columna de la fila 6-->
+          </tr>
+          <tr><!--Septima fila de la fila-->
+            <td>Roberto Fernandez</td><!--Segunda columna de la fila 7-->
+            <td>7</td><!--Tercera columna de la fila 7-->
+          </tr>
+          <tr><!--Octava fila -->
+            <td colspan="2">Promedio</td><!--El atributo colspan le indica a la  columna 1 de la fila 8 que debe tener un ancho de 2 columnas, incluyendose asi misma  -->
+			<!--La columna 2 de la fila 8 se omite, se deberan omitir tantas columnas como ancho indique el atributo colspan--> 
+		   <td>8.5</td><!--Tercera columna de la fila-->
+          </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

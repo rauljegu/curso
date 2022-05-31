@@ -1,0 +1,58 @@
+<Html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Mi primer p&aacute;gina HTML</title>
+    <!--En ocasiones aunque en la cabecera del documento se inidque una codificacion, por alguna razon ajena 
+		y atribuible al equipo del usuario, {esta puede fallar, por lo que la manera correcta de ingresar simbolos y 
+		acentos es utilizar la codificacion ANSII o HTML 
+		--------------------*----------*------------------------*---------------*--------*--------*
+        |Caracter a obtener | apertura | caracter por modificar | palabra clave | cierre | codigo |
+		--------------------*----------*------------------------*---------------*--------*--------*	
+		|		 á  		|	&      |              a         |        acute  |    ;   |&aacute;| 
+		--------------------*----------*------------------------*---------------*--------*--------*	  
+        |		 é  		|	&      |              e         |        acute  |    ;   |&eacute;|  
+		--------------------*----------*------------------------*---------------*--------*--------*	  
+        |		 í  		|	&      |              i         |        acute  |    ;   |&iacute;|  
+		--------------------*----------*------------------------*---------------*--------*--------*	  
+        |		 ó  		|	&      |              o         |        acute  |    ;   |&oacute;|  
+		--------------------*----------*------------------------*---------------*--------*--------*	  
+        |		 ú  		|	&      |              u         |        acute  |    ;   |&uacute;|  
+		--------------------*----------*------------------------*---------------*--------*--------*	 
+			Para las mayusculas es exactamente lo mismo
+    -->
+    <style>
+
+    </style>
+  </head>
+  <body>
+    Hola mundo
+    <h1>Hola Mundo</h1> <!-- Esto es un encabezado de nivel 1-->
+    <h2>Hola Mundo</h2> <!-- Esto es un encabezado de nivel 2 y puedo llegar hasta el nivel h6-->
+    <p>Hola mundo esto es un p&aacute;rrafo</p> <!-- esto es un párrafo-->
+    <p>Este es un p&aacute;rrafo con una <b>etiqueta html</b> anidada</p><!-- la etiquta b significa bold o negrita-->
+    <hr> <!-- La etiqueta hr sirve para mostrar una line horizontal-->
+    <p>Este es un párrafo y <br> esta es una segunda linea de verso</p> <!-- la etiqueta br brake rompe la linea de un parrafo o de un texto, es decir es un salto-->
+    <p>Este es un texto con letras en <i>itálicas</i></p>
+    <p>Este es un texto con letras en <b><i>itálicas con negritas</i></b></p>
+
+    <p>Contrary to popular belief, Lorem Ipsum is not simply random text.
+      It has roots in a piece of classical Latin literature from 45 BC, making it over
+      2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College
+      in Virginia, looked up one of the more obscure Latin words, consectetur,
+      from a Lorem Ipsum passage, and going through the cites of the word in classical
+      literature, discovered the undoubtable source. <br> Lorem Ipsum comes from
+      sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"
+      (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise
+      on the theory of ethics, very popular during the Renaissance.
+      The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a
+      line in section 1.10.32.</p>
+
+      <h2>FORMULARIOS</h2>
+      <a href="#">V&iacute;nculo</a><br><!-- La etiqueta <a> nos permite marcar un hipervinculo para dirigirnos a una seccion dentro del documento HTML-->
+										<!-- la etiqueta <a> cuenta con los atributos href que inidca la seccion o documento 
+										y el atributo target cullo valor puede ser _blank para abrir en una pestaña nueva o self para recargar la actual pestaña
+										si se omite el navegador tomara como cierto el valor self 
+										-->
+      <p><a href="formulario.php" target="_blank">Formulario</a></p><!-- La etiqueta <a> aqui nos permite marcar un hipervinculo para dirigirnos a otro documento HTML-->
+  </body>
+</html>
