@@ -81,26 +81,8 @@
           </tr>
         </thead>
         <tbody>
-          <?php
-                //OBTENCION DE DATOS EN UN SOLO BLOQUE PHP
-                include'conexion.php'; // abro una conexion con BD
-                $sql="SELECT * FROM usuarios"; //Preparo mi consulta SQL
-                $result = $conn->query($sql); // Ejecuto la consulta y la guardo en una variable
-                if ($result->num_rows > 0) { //Con ->num_rows consulto el numero de registros si es mayor a 0 abro un bucle while para mostrarlos
-                    while($row= $result->fetch_assoc()) { //Con fetch_assoc() convierto los registros uno a uno de la tabla SQL en un array y lo guardo en la variable $row
-                      // cuando el while termina su primer vuelta, el array ($row) se reescribe con los datos del siguiente registro y asi sucesivamente
-                      // A continuacion se crea una sring con el html a mostrar del resultado de la consulta
-                      echo '<tr>
-                                <td>'.$row["nombre"].'</td>
-                                <td>'.$row["correo"].'</td>
-                                <td>'.$row["user"].'</td>
-                                <td>'.$row["pass"].'</td>
-                            </tr>'; //*Accedo a los indces: nombre, corre, user, pass (corresponden al nombre de los campos en la tabla ) y los imprimo*/
-                    }
-                } else {echo "No hay registros a&uacute;n"; }
-                ?>
               <?php
-            //OTRA OPCION: OBTENCIO DE DATOS EN VARIOS BLOQUES PHP
+            //OTRA OPCION: OBTENCION DE DATOS EN VARIOS BLOQUES PHP
             include'conexion.php'; // abro una conexion con BD
             $sql="SELECT * FROM usuarios";// Ejecuto la consulta y la guardo en una variable
             $result = $conn->query($sql);// Ejecuto la consulta y la guardo en una variable

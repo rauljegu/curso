@@ -98,28 +98,9 @@
                             </tr>'; //*Accedo a los indces: nombre, corre, user, pass (corresponden al nombre de los campos en la tabla ) y los imprimo*/
                     }
                 } else {echo "No hay registros a&uacute;n"; }
+                conn->close();
                 ?>
-              <?php
-            //OTRA OPCION: OBTENCIO DE DATOS EN VARIOS BLOQUES PHP
-            include'conexion.php'; // abro una conexion con BD
-            $sql="SELECT * FROM usuarios";// Ejecuto la consulta y la guardo en una variable
-            $result = $conn->query($sql);// Ejecuto la consulta y la guardo en una variable
-            if ($result->num_rows > 0) {//Con ->num_rows consulto el numero de registros si es mayor a 0 abro un bucle while para mostrarlos
-                while($row= $result->fetch_assoc()) {//Con fetch_assoc() convierto los registros uno a uno de la tabla SQL en un array y lo guardo en la variable $row
-                  // cuando el while termina su primer vuelta, el array ($row) se reescribe con los datos del siguiente registro y asi sucesivamente
-           ?>
-           <!--En lugar de crear un string se cierra el bloque php -interrumpiendo la sintaxis del if y el while monentaneamete- y se ejecuta HTML-->
-           <tr>
-               <td><?php echo $row["nombre"]; ?></td> <!--para cada dato se abre un nuevo bloque php-->
-               <td><?php echo $row["correo"]; ?></td> <!--para cada dato se abre un nuevo bloque php-->
-               <td><?php echo $row["user"]; ?></td><!--para cada dato se abre un nuevo bloque php-->
-               <td><?php echo $row["pass"]; ?></td><!--para cada dato se abre un nuevo bloque php-->
-          </tr>
-          <?php // se recupera la sintaxis del while y el if y se cierra la conxxion con la db
-        }
-      }
-      conn->close();
-      ?>
+
         </tbody>
     </table>
     <?php include'pie.php'; ?>
