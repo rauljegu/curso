@@ -118,7 +118,7 @@
           <?php // se recupera la sintaxis del while y el if y se cierra la conxxion con la db
         }
       }
-      conn->close();
+      $conn->close();
       ?>
         </tbody>
     </table>
