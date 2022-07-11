@@ -1,12 +1,38 @@
 <?php
-  var_dump($_POST);
+//  var_dump($_POST);
+    //echo $str = "Hola mi nombre es \"RAUL\" ";
+    //echo stripslashes($str);
+    //  echo $html;
+    //  echo "<br>".htmlspecialchars($html)."<br>";
+    //CREAR UNA FUNCION ESPECIALIZADA QUE LIMPIE VALORES DE POST
+  /*  function limpiar($datos){
+      $datos = trim($datos);
+      $datos = stripslashes($datos);
+      $datos = htmlspecialchars($datos);
+      return $datos;
+    }*/
+
   //VALIDA isset que POST este definido y !empty que POST no tenga inidces vacios//valida que no exista el indice editar
   if( ( isset($_POST) ) && ( !empty($_POST) && (!isset($_GET["editar"])) ) ){
+    /*function limpiar($datos){
+      $datos = trim($datos);
+      $datos = stripslashes($datos);
+      $datos = htmlspecialchars($datos);
+      return $datos;
+    }*/
+    include'funciones.php';
     //Recuperar los campos del formulario a traves de su indice en el array POST
-      $nombre = $_POST["nombre"];
-      $correo = $_POST["correo"];
-      $usuario = $_POST["user"];
-      $contra = $_POST["pass"];
+      $nombre = limpiar($_POST["nombre"]); // $datos
+      $correo = limpiar($_POST["correo"]); // $datos
+      $usuario = limpiar($_POST["user"]);
+      $contra = limpiar($_POST["pass"]);
+      echo $contra;
+      $contra = MD5($contra);
+      echo "<br>".$contra."<br>";
+    /*  function my_fun(){
+        echo "HOLA A TODOS ";
+      }
+       my_fun();*/
      // CREO una CONSULTA SQL para crear por primera vez mi tabla y la guardo en la variable $sql
      $sql="CREATE TABLE IF NOT EXISTS usuarios (
        id_usuario INT(255) NOT NULL AUTO_INCREMENT,
@@ -23,8 +49,12 @@
      //la vartiable $conn guarda el resultado de la conexxion con la BD
      // Con -> puedo enviar o recibir informacion de la conexion a la BD
      // la funcion query() envia una consulta, por ello en los parentesis inidco la consulta con la variable $sql
-     if ($conn->query($sql) === TRUE) { // valido el resultado de la consulta , si se realizó será TRUE
+    if ($conn->query($sql) === TRUE) { // valido el resultado de la consulta , si se realizó será TRUE
 												echo "la tabla  ha sido creada";
+                        $sql1="ALTER TABLE usuarios ADD UNIQUE('user')";
+                        $conn->query($sql1);
+                        $sql2="ALTER TABLE usuarios ADD UNIQUE('correo')";
+                        $conn->query($sql2);
 											} else {
 												echo "Hubo un error al crear la tabla usuarios: " . $conn->error; // ->error me permite saber cual error
                                                                                           // al realizar la query()
@@ -63,19 +93,19 @@
 	if(isset($_GET["editar"])){ //Se valida que el indice "editar" de la funcion GET no este definido, para evitar mensajes de warning
 								$editar = $_GET["editar"]; //Si esta definido se guarda en la variable $editar e inidca que entraremos en el bloque if de edicion
 	} else {
-			$editar = ""; // si no esta definido el inidce se declara la variable $editar como vacia para evitar la parte TRUE del IF de edicion 
+			$editar = ""; // si no esta definido el inidce se declara la variable $editar como vacia para evitar la parte TRUE del IF de edicion
 	}
-	
+
 	if($editar == 1){// se valida que el inidce GET valga 1 (valor predeterminado por nosotros en la url)
         $id = $_GET["id"]; // Rescatamos el id del registro objetivo a editar que nos hemos enviado por enlace (<a>) en la url
         echo "Actualizando el registro. El valor es 1 y su id es ".$id."<br>";
-        
+
 		include'conexion.php';// iniciamos una conexion a BD
         $sql="SELECT * FROM usuarios WHERE id_usuario = $id";//Preparamos la consulta para obtener solo los datos de este registro
         $result = $conn->query($sql); //guardamos la consulta y conexxion en una variable
-        
+
 		if ($result->num_rows > 0) { // validamos que la consulta nos haya devuelto al menos un registro
-          
+
 		  while($row= $result->fetch_assoc()) { // obtenemos en forma de array el registro y lo guardamos en el el array row
 		  // Mostramos un formulario con los datos guardados en la BD para poder elegir que datos se actulizaran
 		  ?>
@@ -87,22 +117,22 @@
                 <p><input type="submit" value="actualizar" name="actualizar"></p><!--Generalmente el boton de un formulario no lleva un Name, en este caso lo agregamos con el objetivo de Entrar al IF de Actualizacion -->
             </form>
           <?php
-          } //fin del WHILE 
+          } //fin del WHILE
         }// fin del if
 		$conn->close(); // Cerramos la conexxion a la BD
-      
+
 		//////////////////////HACER EFECTIVO EL CAMBIO IF DE ACTUALIZACION
 		if(isset($_POST["actualizar"])){ //Se valida que el indice "actualizar" de la funcion POST no este definido,  para evitar mensajes de warning.
 										$actualizar = $_POST["actualizar"];//Si esta definido se guarda en la variable $actualizar e inidca que entraremos en el bloque if de actualizacion
 		} else {
-				$actualizar = "";// si no esta definido el inidce se declara la variable $actualizar como vacia para evitar la parte TRUE del IF de actualizacion 
+				$actualizar = "";// si no esta definido el inidce se declara la variable $actualizar como vacia para evitar la parte TRUE del IF de actualizacion
 		}
-      
+
 		if($actualizar == 'actualizar'){// se valida que el inidce "actualizar" de la variable  POST exista  (valor enviado en el boton submit del form)
 										$nombre = $_POST["nombre"]; //Recuperamos los datos del array POST uno a uno
 										$correo = $_POST["correo"];
 										$user = $_POST["user"];
-										$pass = $_POST["pass"];
+										$pass = MD5($_POST["pass"]);
 										include'conexion.php';
 										//Preparo mi CONSULTA
 										$sql="UPDATE usuarios SET
@@ -120,7 +150,7 @@
 										} else {
 												// SI: NO FALSE (TRUE)
 												echo 'Registro Actualizado exitosamente'; // Enviamos un mensaje para inidcar que se realizó el cambio
-												header("refresh: 1; url = registro_metodo2.php");// Como se queda el formulario de actualizacion abierto y este no se actualiza 
+												header("refresh: 1; url = registro_metodo2.php");// Como se queda el formulario de actualizacion abierto y este no se actualiza
 												//usamos la funcion header(), este cambia la url que estamos consultando, el valor "refresh" inidca el tiempo en segundos que tarda en ejecutarse la fucion
 												// el valor "url" nos inidca la direccion a la que se redirigira nuestro sitio, en este caso se renvia al archivo php limpiando la url de GET y POST previos
 										}
@@ -134,7 +164,7 @@
 	} else {
 			$editar = "";
 	}
-	
+
 	if($editar == 2){ // se valida que el inidce GET valga 2 (valor predeterminado por nosotros en la url) inidcamos con este valor que la edicion será de eliminacion en la BD
 						$id = $_GET["id"];
 						echo "Eliminando el registro. El valor es 2 y su id es ".$id."<br>";
@@ -148,8 +178,8 @@
 									echo 'Registro Eliminado Exitosamente';
 						}
 	} //fin del IF Editar = 2
-/////////////////////////////////////////////////////////FUNCIONALIDAD ELIMINAR -ELIMINANDO DIRECTAMENTE EN BD-//////////////////////////////////////	  
-     
+/////////////////////////////////////////////////////////FUNCIONALIDAD ELIMINAR -ELIMINANDO DIRECTAMENTE EN BD-//////////////////////////////////////
+
 
 ////////////////////////////////////////////////////// ////FUNCIONALIDAD ELIMINAR -INACTIVANDO DIRECTAMENTE EN BD SIN ELIMINAR EL REGISTRO-///////////////////////////////
       if(isset($_GET["editar"])){
@@ -177,7 +207,7 @@
     <title>Proyecto</title>
   </head>
   <body>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <form action="<?php echo  htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
       <p id="name" class="formulario registro">Nombre <input type="text" name="nombre"></p>
       <p>Correo <input type="mail" name="correo"></p>
       <p>Nombre de usuario <input type="text" name="user"></p>
@@ -225,6 +255,6 @@
       ?>
         </tbody>
     </table>
-    <?php include'pie.php'; ?>
+    <?php include'pie.php';  ?>
   </body>
 </html>
