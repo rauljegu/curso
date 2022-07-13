@@ -6,9 +6,12 @@
     //  echo "<br>".htmlspecialchars($html)."<br>";
     //CREAR UNA FUNCION ESPECIALIZADA QUE LIMPIE VALORES DE POST
   /*  function limpiar($datos){
-      $datos = trim($datos);
-      $datos = stripslashes($datos);
-      $datos = htmlspecialchars($datos);
+      $datos = trim($datos); // trim(); elimina esapacios en blanco al inicio y al final de una cadena de texto **OJO no elimina espacios intermedios **
+      $datos = stripslashes($datos); // stripslashes elimina "\" a caracteres que pueden interrumpir en el codigo php como son las comillas simples y dobles, parentesis,
+                                      // y signos de puntuacion, el objetivo es  que el codigo falle si estan enviando informacion enmascarada
+      $datos = htmlspecialchars($datos); // esta funcion convierte a los caracteres espaciales que hacen funcionar las etiquetas html:
+                                        //    " ' ", " " ", " < ", " > " y " & ", en su equivalente HTML (similar a convertir á en &aacute;), de modo que si nosotros
+                                        // inyectan HTML este se muestre como texto y no como una etiqueta.
       return $datos;
     }*/
 
@@ -27,7 +30,11 @@
       $usuario = limpiar($_POST["user"]);
       $contra = limpiar($_POST["pass"]);
       echo $contra;
-      $contra = MD5($contra);
+      $contra = MD5($contra); //  la funcion MD5();  (message-digest algorithm) toma una cadena de tamaño arbitrario como entrada de un mensaje
+                              // y devuelve una cadena de salida (hash) de  128-bit que es una "fingerprint" (huella digital ) o  "message digest" (mensaje digerido)
+                              //unico para dicha entrada. Utiliza un algoritmo especial que es dificil de resolver y se utiliza como  por lo cual para encip`tar de manera segura
+                              //informacion. lo utilizamos para encriptar el password y guardarlo en db // Ventaja nadie salvo el usurio conoce sur pass, Deventaja no hay un algoritmo
+                              //que convierta el hash en el mensaje orignal
       echo "<br>".$contra."<br>";
     /*  function my_fun(){
         echo "HOLA A TODOS ";
