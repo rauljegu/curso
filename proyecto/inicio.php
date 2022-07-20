@@ -87,12 +87,46 @@
 <html>
   <head>
     <title>Login</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <style>
+    /*  *{
+        font-size: 22px;
+          margin: 0px;
+        font-family: Arial, monospace, Times New Roman;
+
+      }
+      p {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      input[type="text"]{
+        width:50%;
+      }
+      form{
+        margin: 0px auto;
+        width:90%;
+      }
+      #nombreAPP{
+        font-size: 32px;
+        color:gray;
+        text-align: center;
+      }
+      .inicio{
+        color:green;
+      }
+      .inicio p{
+        font-size: 35px;
+      }*/
+    </style>
   </head>
   <body>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-      <p>Ingresa tu usuario: <input type="text" name="user"></p>
+    <h1 id="nombreAPP" >Mi Proyecto</h1>
+    <h1 id="nombreAPP">Bienvenido</h1>
+    <p>Ingresa tus datos para iniciar sesi&oacute;n</p>
+    <form class="inicio" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+      <p style="/*font-size:32px;*/">Usuario: <input  type="text" name="user"></p>
       <p>Contrase&ntilde;a: <input type="text" name="pass"></p>
-      <p><input type="submit" value="INICIAR SESION"</p>
+      <p><input type="submit" value="INICIAR SESION"></p>
     </form>
   </body>
 </html>
